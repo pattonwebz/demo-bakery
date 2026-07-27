@@ -9,6 +9,22 @@ CI/CD. On every push it deploys to GitHub Pages and is then scanned live by
 **The workflow is expected to fail.** That's the demo: the report enforces `fail-on: serious`
 against pages that contain intentional violations.
 
+## Pull-request merge gate (fast CI path)
+
+This repo now includes a dedicated PR workflow at
+`.github/workflows/pr-gate-scan.yml` with job name:
+
+- **`PR Accessibility Gate`**
+
+The job serves `site/` locally on the Actions runner, scans all pages with
+`axe-scan-action`, renders summary/report artifacts, and fails on threshold.
+Because it scans localhost on-runner, it is much faster than server deploy
+flows and is ideal for live CI gate demos.
+
+To make this a true merge gate, set branch protection on `main` and require:
+
+- **`PR Accessibility Gate`**
+
 All seven pages share a real product-site look (`site/assets/style.css`): a nav bar, a hero
 section, a menu/feature grid, and a footer with a working newsletter signup form — so the
 intentional violations sit inside a page that actually looks like something worth scanning,

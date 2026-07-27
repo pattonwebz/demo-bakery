@@ -1,0 +1,97 @@
+name: PR accessibility gate
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-gate-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pr-accessibility-gate:
+    name: PR Accessibility Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start local static server
+        run: |
+          cd site
+          python3 -m http.server 4173 > ../server.log 2>&1 &
+          echo $! > ../server.pid
+
+      - name: Wait for local server
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail "http://127.0.0.1:4173/index.html" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Static server did not become ready in time." >&2
+          cat server.log || true
+          exit 1
+
+      - name: Build URL list
+        run: |
+          printf '%s\n' \
+            "http://127.0.0.1:4173/index.html" \
+            "http://127.0.0.1:4173/about.html" \
+            "http://127.0.0.1:4173/menu.html" \
+            "http://127.0.0.1:4173/gallery.html" \
+            "http://127.0.0.1:4173/events.html" \
+            "http://127.0.0.1:4173/contact.html" \
+            "http://127.0.0.1:4173/clean.html" > urls.txt
+          cat urls.txt
+
+      - name: Scan with axe-core
+        id: scan
+        continue-on-error: true
+        uses: pattonwebz/axe-scan-action@v0.0.3
+        with:
+          urls-file: urls.txt
+
+      - name: Report and enforce threshold
+        if: always()
+        uses: pattonwebz/axe-report-action@v0.0.3
+        with:
+          results-file: ${{ steps.scan.outputs.results-file }}
+          fail-on: serious
+          show-personas: true
+
+      - name: Render HTML report
+        if: always()
+        id: html
+        uses: pattonwebz/axe-html-report-action@v0.0.2
+        with:
+          results-file: ${{ steps.scan.outputs.results-file }}
+          output-file: axe-report-pr-gate.html
+          title: Demo Bakery PR accessibility gate report
+
+      - name: Upload raw results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-gate-axe-results
+          path: ${{ steps.scan.outputs.results-file }}
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-gate-accessibility-report
+          path: ${{ steps.html.outputs.report-file }}
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill "$(cat server.pid)" || true
+          fi
