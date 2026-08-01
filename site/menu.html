@@ -3,13 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Demo Bakery — Menu</title>
+	<title>Menu — Demo Bakery</title>
+	<meta name="description" content="Breads, pastries and cakes baked in-house daily at Demo Bakery.">
 	<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+	<a class="skip-link" href="#main">Skip to main content</a>
+
 	<nav class="site-nav" aria-label="Primary">
 		<div class="site-nav__inner">
-			<a class="site-nav__logo" href="index.html">🍞 Demo Bakery</a>
+			<a class="site-nav__logo" href="index.html">Demo Bakery</a>
 			<ul class="site-nav__links">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="menu.html" aria-current="page">Menu</a></li>
@@ -17,155 +20,149 @@
 				<li><a href="events.html">Events</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
-				<li><a href="clean.html">The Accessible Page</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1549937334-94cef79a5fe6?w=1200&q=80');">
-		<p class="page-hero__eyebrow">Fresh daily, baked since 2026</p>
-		<h1>Our menu</h1>
-		<p class="page-hero__lede">Everything made from scratch with locally sourced ingredients. Prices include tax.</p>
-	</section>
+	<main id="main">
+		<header class="page-hero">
+			<div class="wrap">
+				<p class="eyebrow">What we bake</p>
+				<h1>The menu</h1>
+				<p class="lede">All made in-house daily.</p>
+			</div>
+		</header>
 
-	<main>
-		<div class="wrap">
-			<section class="section">
-				<h2 class="section__title">Breads</h2>
-				<p class="section__intro">Long-fermented, hand-shaped, baked on stone.</p>
+		<section class="section">
+			<div class="wrap">
+				<div class="menu-group">
+					<h2>Breads</h2>
+					<ul class="menu-list">
+						<li>
+							<span class="menu-list__name">Sourdough</span>
+							<span class="menu-list__price">$8.50</span>
+							<span class="menu-list__desc">Open crumb, sour notes, grilled crust.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Whole wheat</span>
+							<span class="menu-list__price">$7.50</span>
+							<span class="menu-list__desc">Hearty grain, subtle sweetness.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Rye loaf</span>
+							<span class="menu-list__price">$8.00</span>
+							<span class="menu-list__desc">Dark grain, earthy flavour, dense crumb.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Focaccia</span>
+							<span class="menu-list__price">$6.50</span>
+							<span class="menu-list__desc">Olive oil, rosemary, sea salt.</span>
+						</li>
+					</ul>
+				</div>
 
-				<!-- INTENTIONAL VIOLATION: table with no caption element, th has no scope -->
-				<table class="price-table">
-					<thead>
-						<tr>
-							<th>Item</th>
-							<th></th>
-							<!-- INTENTIONAL VIOLATION: empty th -- axe empty-table-header -->
-							<th>Price</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Sourdough loaf</td>
-							<td><span class="badge"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#c98a3e"/></svg> vegan</span></td>
-							<td class="price">$6.50</td>
-						</tr>
-						<tr>
-							<td>Ciabatta</td>
-							<td><span class="badge"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#c98a3e"/></svg> vegan</span></td>
-							<td class="price">$5.00</td>
-						</tr>
-						<tr>
-							<td>Brioche</td>
-							<td><span class="badge">🐄 dairy</span></td>
-							<td class="price">$7.25</td>
-						</tr>
-						<tr>
-							<td>Focaccia (rosemary & sea salt)</td>
-							<td><span class="badge"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#c98a3e"/></svg> vegan</span></td>
-							<td class="price">$5.50</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="menu-group">
+					<h2>Pastries</h2>
+					<ul class="menu-list">
+						<li>
+							<span class="menu-list__name">Croissant</span>
+							<span class="menu-list__price">$5.00</span>
+							<span class="menu-list__desc">Butter laminated, flaky, golden.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Pain au chocolat</span>
+							<span class="menu-list__price">$5.50</span>
+							<span class="menu-list__desc">Dark chocolate bars, crisp pastry.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Almond croissant</span>
+							<span class="menu-list__price">$6.00</span>
+							<span class="menu-list__desc">Almond cream, toasted sliced almonds.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Danish</span>
+							<span class="menu-list__price">$5.50</span>
+							<span class="menu-list__desc">Seasonal fruit or cheese filling.</span>
+						</li>
+					</ul>
+				</div>
 
-				<!-- INTENTIONAL VIOLATION: SVG inside badge has aria-hidden="true" instead of an accessible label.
-				     The SVG conveys the meaning "this item is vegan" — role="img" with an aria-label would be correct.
-				     Using aria-hidden="true" hides it from AT, so screen reader users miss the dietary info. -->
+				<div class="menu-group">
+					<h2>Cakes</h2>
+					<ul class="menu-list">
+						<li>
+							<span class="menu-list__name">Carrot cake</span>
+							<span class="menu-list__price">$4.50</span>
+							<span class="menu-list__desc">Cream cheese frosting, whole wheat base.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Lemon cake</span>
+							<span class="menu-list__price">$4.50</span>
+							<span class="menu-list__desc">Zest and juice, light crumb.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Chocolate cake</span>
+							<span class="menu-list__price">$5.00</span>
+							<span class="menu-list__desc">Dark chocolate, fudgy interior, glossy top.</span>
+						</li>
+						<li>
+							<span class="menu-list__name">Seasonal tart</span>
+							<span class="menu-list__price">$6.00</span>
+							<span class="menu-list__desc">Fresh fruit, almond cream, butter crust.</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 
-				<h2 class="section__title">Pastries</h2>
-				<p class="section__intro">Baked fresh each morning before the doors open.</p>
-
-				<table class="price-table">
-					<thead>
-						<tr>
-							<th>Item</th>
-							<th>Dietary</th>
-							<th>Price</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Butter croissant</td>
-							<td><span class="badge">🐄 dairy</span></td>
-							<td class="price">$4.50</td>
-						</tr>
-						<tr>
-							<td>Pain au chocolat</td>
-							<td><span class="badge">🐄 dairy</span></td>
-							<td class="price">$5.00</td>
-						</tr>
-						<tr>
-							<td>Cinnamon roll</td>
-							<td><span class="badge">🐄 dairy</span></td>
-							<td class="price">$5.50</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<h2 class="section__title">Drinks</h2>
-				<p class="section__intro">Locally roasted coffee, house-made syrups.</p>
-
-				<!-- INTENTIONAL VIOLATION: low-contrast "promo" banner text color -->
-				<div class="special-banner">☕ Add any pastry for $3 more when ordered with a drink!</div>
-
-				<table class="price-table">
-					<thead>
-						<tr>
-							<th>Item</th>
-							<th>Size</th>
-							<th>Price</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Drip coffee</td>
-							<td>12oz / 16oz</td>
-							<td class="price">$3.00 / $3.75</td>
-						</tr>
-						<tr>
-							<td>Latte</td>
-							<td>12oz / 16oz</td>
-							<td class="price">$4.50 / $5.25</td>
-						</tr>
-						<tr>
-							<td>Cold brew</td>
-							<td>12oz / 16oz</td>
-							<td class="price">$4.00 / $4.75</td>
-						</tr>
-						<tr>
-							<td>Chai latte</td>
-							<td>12oz / 16oz</td>
-							<td class="price">$4.75 / $5.50</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<!-- INTENTIONAL VIOLATION: dead link -->
-				<p style="margin-top: 1.5rem;">Check out our <a href="">daily special</a> board for seasonal items.</p>
-
-			</section>
-		</div>
+		<section class="statement">
+			<div class="statement__media">
+				<img src="assets/img/display-case-2000.jpg"
+					srcset="assets/img/display-case-800.jpg 600w, assets/img/display-case-1200.jpg 900w, assets/img/display-case-2000.jpg 1500w"
+					sizes="100vw" width="1500" height="2000" loading="lazy"
+					alt="A bakery display case filled with croissants, danishes and pastries with handwritten price cards.">
+			</div>
+			<div class="wrap statement__inner">
+				<h2>Baked this morning.</h2>
+				<p>When it's gone, it's gone. We don't bake twice.</p>
+			</div>
+		</section>
 	</main>
 
 	<footer class="site-footer">
-		<div class="site-footer__inner">
-			<div>
-				<h2>Get fresh-bake alerts</h2>
-				<p>One email a week when something new comes out of the oven. No spam, just bread.</p>
-				<form class="newsletter-form" action="#" method="post">
-					<div class="field">
-						<label for="newsletter-email">Email address</label>
-						<input id="newsletter-email" type="email" name="email" autocomplete="email">
-					</div>
-					<button type="submit">Subscribe</button>
-				</form>
+		<div class="wrap">
+			<div class="site-footer__grid">
+				<div>
+					<h2>Fresh-bake alerts</h2>
+					<p>One email a week when something new comes out of the oven.</p>
+					<form class="form" action="#" method="post">
+						<div class="field">
+							<label for="newsletter-email">Email address</label>
+							<input id="newsletter-email" type="email" name="email" autocomplete="email">
+						</div>
+						<div><button class="btn btn--primary" type="submit">Subscribe</button></div>
+					</form>
+				</div>
+				<div>
+					<h2>Visit</h2>
+					<p>1247 NW Stark Street<br>Portland, Oregon 97209</p>
+					<ul class="site-footer__links">
+						<li><a href="menu.html">Menu</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="events.html">Events</a></li>
+					</ul>
+				</div>
+				<div>
+					<h2>Hours</h2>
+					<p>Weekdays 6am – 7pm<br>Weekends 7am – 6pm</p>
+					<ul class="site-footer__links">
+						<li><a href="about.html">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<h2>About this site</h2>
-				<p>A deliberately half-broken static demo used to show accessibility scanning in CI/CD. See the <a href="https://github.com/pattonwebz/a11y-test-site">source on GitHub</a> for what's intentionally broken and why.</p>
-			</div>
+			<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists as a demonstration project.</p>
 		</div>
-		<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists to be scanned, not to sell bread.</p>
 	</footer>
 </body>
 </html>

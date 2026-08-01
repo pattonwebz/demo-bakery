@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { extname, join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
@@ -65,7 +65,12 @@ try {
 	const scanEntry = join( root, "node_modules", "axe-scan-action", "dist", "index.js" );
 	const scanEnv = {
 		...process.env,
-		"INPUT_URLS": JSON.stringify( [ base, `${ base }about.html`, `${ base }clean.html` ] ),
+		"INPUT_URLS": JSON.stringify(
+			readdirSync( join( root, "site" ) )
+				.filter( ( file ) => file.endsWith( ".html" ) )
+				.sort()
+				.map( ( file ) => `${ base }${ file }` )
+		),
 		"INPUT_OUTPUT-FILE": resultsFile,
 	};
 	await run( "node", [ scanEntry ], scanEnv );

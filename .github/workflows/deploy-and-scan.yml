@@ -1,5 +1,8 @@
 name: Deploy and scan
 
+# The gate runs BEFORE the deploy. A site with a serious accessibility
+# violation never reaches GitHub Pages — the deploy job is skipped entirely.
+
 on:
   push:
     branches: [ main ]
@@ -15,43 +18,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  accessibility:
+    name: Accessibility Gate
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    outputs:
-      page_url: ${{ steps.deployment.outputs.page_url }}
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site/
-      - id: deployment
-        uses: actions/deploy-pages@v4
 
-  accessibility:
-    name: Accessibility scan of the live site
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build URL list from the deployed base URL
+      - name: Start local static server
         run: |
-          base="${{ needs.deploy.outputs.page_url }}"
-          printf '%s\n' \
-            "$base" \
-            "${base}about.html" \
-            "${base}menu.html" \
-            "${base}gallery.html" \
-            "${base}events.html" \
-            "${base}contact.html" \
-            "${base}clean.html" > urls.txt
+          cd site
+          python3 -m http.server 4173 > ../server.log 2>&1 &
+          echo $! > ../server.pid
+
+      - name: Wait for local server
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail "http://127.0.0.1:4173/index.html" > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Static server did not become ready in time." >&2
+          cat server.log || true
+          exit 1
+
+      # Derived from the files on disk so the list can never drift out of sync
+      # with the site itself.
+      - name: Build URL list
+        run: |
+          for page in site/*.html; do
+            echo "http://127.0.0.1:4173/$(basename "$page")"
+          done > urls.txt
           cat urls.txt
 
       - name: Scan with axe-core
         id: scan
+        continue-on-error: true
         uses: pattonwebz/axe-scan-action@v0.0.3
         with:
           urls-file: urls.txt
@@ -86,3 +90,26 @@ jobs:
         with:
           name: accessibility-report
           path: ${{ steps.html.outputs.report-file }}
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill "$(cat server.pid)" || true
+          fi
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: accessibility
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+      - id: deployment
+        uses: actions/deploy-pages@v4

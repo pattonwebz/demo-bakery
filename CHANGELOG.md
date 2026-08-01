@@ -2,6 +2,54 @@
 
 Notable changes to this demo site and its scan pipeline.
 
+## 2026-08-01
+
+### Changed — the premise is inverted
+
+`main` is now **clean: zero axe violations across all six pages**. Deliberate breakage moves into
+pull requests. Previously `main` shipped catalogued violations with `clean.html` as the single
+passing row, which meant the gate could never be shown blocking anything — the baseline was already
+red.
+
+### Changed — the deploy gates on the scan
+
+`deploy-and-scan.yml` previously deployed to Pages *first* and scanned the live site afterwards, so
+a violation could not stop the deploy. The scan now runs against a local server on the runner as an
+`Accessibility Gate` job, and the Pages deploy `needs:` it. A broken site is never published.
+
+Both workflows now derive their URL list from the `.html` files present in `site/` rather than a
+hardcoded list, so the list cannot drift when pages are added or removed. `scripts/run-locally.mjs`
+does the same.
+
+### Changed — full visual rebuild
+
+- New design system in `site/assets/style.css`: cool near-monochrome palette, photography carries
+  the colour. Explicit type, spacing, radius and elevation scales. One card language throughout.
+  Body text 8.6:1, muted-on-dark 12.0:1 — both AAA.
+- All six pages rebuilt on it: full-bleed hero and statement sections, a real menu list, a
+  nine-image gallery, an events list, an about page with stats, and a described contact form.
+- Every page gains a skip link and a `<main>` landmark.
+- No inline `style` attributes remain.
+
+### Added — local photography
+
+- 16 royalty-free Unsplash photographs vendored into `site/assets/img/` at three widths each, with
+  `site/assets/img/ATTRIBUTIONS.md` recording photographer and source per image. No Unsplash+
+  (premium) images are used.
+
+### Fixed
+
+- **The live site was serving broken images.** Of the eight hotlinked Unsplash URLs, four already
+  returned 404. The site now makes no remote requests at all.
+- A ghost button rendered near-black on the dark hero photograph, making its label invisible. Dark
+  grounds now invert the button pair.
+
+### Removed
+
+- `clean.html`, and its nav entry. Every page is the accessible page now, so the special case had no
+  meaning left.
+- `site/assets/bread.svg`, unused after the rebuild.
+
 ## 2026-07-24
 
 ### Added (local runner)

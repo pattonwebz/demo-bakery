@@ -3,27 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Demo Bakery — Gallery</title>
+	<title>Gallery — Demo Bakery</title>
+	<meta name="description" content="From grain to table: photographs of the bread, pastries and people at Demo Bakery.">
 	<link rel="stylesheet" href="assets/style.css">
-	<style>
-		/* INTENTIONAL VIOLATION: SVG with role="presentation" but it conveys meaning */
-		.gallery-icon {
-			display: block;
-			margin: 0 auto 1.5rem;
-			width: 60px;
-			height: 60px;
-		}
-		/* INTENTIONAL VIOLATION: styling a div to look like a clickable card */
-		.lightbox-tile {
-			cursor: pointer;
-			user-select: none;
-		}
-	</style>
 </head>
 <body>
+	<a class="skip-link" href="#main">Skip to main content</a>
+
 	<nav class="site-nav" aria-label="Primary">
 		<div class="site-nav__inner">
-			<a class="site-nav__logo" href="index.html">🍞 Demo Bakery</a>
+			<a class="site-nav__logo" href="index.html">Demo Bakery</a>
 			<ul class="site-nav__links">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="menu.html">Menu</a></li>
@@ -31,125 +20,119 @@
 				<li><a href="events.html">Events</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
-				<li><a href="clean.html">The Accessible Page</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<section class="page-hero">
-		<p class="page-hero__eyebrow">A picture is worth a thousand calories</p>
-		<h1>Gallery</h1>
-		<p class="page-hero__lede">A peek inside our bakery — fresh loaves, flaky pastries, and the faces behind the flour.</p>
-	</section>
+	<main id="main">
+		<header class="page-hero">
+			<div class="wrap">
+				<p class="eyebrow">Our work</p>
+				<h1>The process</h1>
+				<p class="lede">From grain to table, captured.</p>
+			</div>
+		</header>
 
-	<main>
-		<div class="wrap">
-			<section class="section">
-				<!-- INTENTIONAL VIOLATION: decorative SVG with role="presentation" that actually conveys "gallery" meaning -->
-				<svg class="gallery-icon" role="presentation" viewBox="0 0 60 60" width="60" height="60">
-					<rect x="5" y="10" width="50" height="40" rx="4" fill="none" stroke="#9a3412" stroke-width="3"/>
-					<circle cx="22" cy="25" r="6" fill="#c98a3e"/>
-					<path d="M8 45 L18 35 L25 40 L32 30 L52 48" fill="none" stroke="#9a3412" stroke-width="2.5" stroke-linejoin="round"/>
-				</svg>
-				<!-- The SVG depicts a framed picture with an image of a landscape/mountain —
-				     it's decorative in theory but in context it's the gallery section icon, conveying "photos go here".
-				     role="presentation" hides it from AT. Should be role="img" with aria-label. -->
-
-				<h2 class="section__title" style="text-align: center;">Our bakes</h2>
-				<p class="section__intro" style="text-align: center; max-width: 50ch; margin-left: auto; margin-right: auto;">Every loaf, pastry, and cake that comes out of our oven is made by hand. Here are some of our favourites.</p>
-
-				<!-- INTENTIONAL VIOLATIONS: gallery images with no alt text -->
-				<div class="gallery-grid">
-					<!-- INTENTIONAL: image with no alt attribute at all (axe image-alt) -->
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80">
-						<div class="gallery-item__caption">Fresh sourdough</div>
-						<!-- INTENTIONAL VIOLATION: empty link wrapping the "view" faux button ... actually -->
-						<!-- INTENTIONAL: the empty link is below, separate -->
-					</div>
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1555507036-ab1f4038028a?w=400&q=80">
-						<div class="gallery-item__caption">Butter croissants</div>
-					</div>
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&q=80">
-						<div class="gallery-item__caption">Cinnamon rolls</div>
-					</div>
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1608198093002-ad4e00548444?w=400&q=80">
-						<div class="gallery-item__caption">Brioche loaf</div>
-					</div>
-
-					<!-- INTENTIONAL VIOLATION: tabindex="3" on a non-interactive element -->
-					<div class="gallery-item" tabindex="3">
-						<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80">
-						<div class="gallery-item__caption">Chocolate cake</div>
-					</div>
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1486427944544-d2c246c4cb6a?w=400&q=80">
-						<div class="gallery-item__caption">Scones & clotted cream</div>
-					</div>
+		<section class="section">
+			<div class="wrap wrap--wide">
+				<div class="gallery">
+					<figure>
+						<img src="assets/img/hero-flour-800.jpg" width="640" height="800" loading="lazy"
+							alt="Flour falling from a baker's clapped hands onto a round seeded loaf below.">
+						<figcaption>Flour dusted, scored, ready to bake.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/sourdough-loaf-800.jpg" width="533" height="800" loading="lazy"
+							alt="A baker holds a finished sourdough loaf wrapped in a linen cloth.">
+						<figcaption>Our baker's hands recognise the perfect proof.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/croissants-tray-800.jpg" width="533" height="800" loading="lazy"
+							alt="Rows of golden croissants cooling on a perforated metal baking tray.">
+						<figcaption>Fresh croissants still steaming from the oven.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/cinnamon-rolls-800.jpg" width="600" height="800" loading="lazy"
+							alt="Cinnamon rolls topped with pearl sugar on a dark tray dusted with flour.">
+						<figcaption>Cinnamon and brown sugar in spiral.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/rustic-loaves-800.jpg" width="800" height="532" loading="lazy"
+							alt="Three seeded rustic loaves stacked on dark wood beside ears of wheat.">
+						<figcaption>Seeded crust. Crackling as it cools.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/display-case-800.jpg" width="600" height="800" loading="lazy"
+							alt="A glass display case of croissants, danishes and cookies with price cards.">
+						<figcaption>Everything we bake is here.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/coffee-pastries-800.jpg" width="533" height="800" loading="lazy"
+							alt="A latte with leaf art surrounded by four croissants and filled pastries.">
+						<figcaption>The full breakfast in one place.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/dough-hands-800.jpg" width="533" height="800" loading="lazy"
+							alt="Two floured hands shaping a ball of dough on a work surface.">
+						<figcaption>Hands know what the dough needs.</figcaption>
+					</figure>
+					<figure>
+						<img src="assets/img/bread-baskets-800.jpg" width="800" height="533" loading="lazy"
+							alt="Assorted loaves and rolls resting in woven wicker baskets.">
+						<figcaption>Cooled and rested before service.</figcaption>
+					</figure>
 				</div>
+			</div>
+		</section>
 
-				<!-- INTENTIONAL VIOLATION: empty link wrapping an image -->
-				<div style="text-align: center; margin-top: 2rem;">
-					<p>Want to see more? Follow us on <a href="https://instagram.com">Instagram</a>.</p>
-					<!-- Empty link: no text or aria-label -->
-					<a href="https://unsplash.com"></a>
-				</div>
-			</section>
-
-			<!-- Decorative SVG divider -->
-			<svg class="divider" viewBox="0 0 180 24" aria-hidden="true">
-				<path d="M10 12 Q30 4 50 12 Q70 20 90 12 Q110 4 130 12 Q150 20 170 12" fill="none" stroke="#dba56d" stroke-width="2.5"/>
-				<circle cx="90" cy="12" r="3" fill="#dba56d"/>
-			</svg>
-
-			<section class="section">
-				<h2 class="section__title" style="text-align: center;">Behind the scenes</h2>
-				<div class="gallery-grid">
-					<div class="gallery-item gallery-item--tile" role="img">
-						🥖
-					</div>
-					<!-- INTENTIONAL VIOLATION: role="img" with no aria-label or aria-labelledby above -->
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80">
-						<div class="gallery-item__caption">The dough room</div>
-					</div>
-
-					<div class="gallery-item">
-						<img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80">
-						<div class="gallery-item__caption">Freshly baked bread</div>
-					</div>
-				</div>
-			</section>
-		</div>
+		<section class="statement">
+			<div class="statement__media">
+				<img src="assets/img/bakery-counter-2000.jpg"
+					srcset="assets/img/bakery-counter-800.jpg 800w, assets/img/bakery-counter-1200.jpg 1200w, assets/img/bakery-counter-2000.jpg 1600w"
+					sizes="100vw" width="1600" height="1191" loading="lazy"
+					alt="A bakery counter stacked with baguettes and country loaves in wooden trays.">
+			</div>
+			<div class="wrap statement__inner">
+				<h2>Every morning, from scratch.</h2>
+				<p>The shelves are empty at five. Full by seven.</p>
+			</div>
+		</section>
 	</main>
 
 	<footer class="site-footer">
-		<div class="site-footer__inner">
-			<div>
-				<h2>Get fresh-bake alerts</h2>
-				<p>One email a week when something new comes out of the oven. No spam, just bread.</p>
-				<form class="newsletter-form" action="#" method="post">
-					<div class="field">
-						<label for="newsletter-email">Email address</label>
-						<input id="newsletter-email" type="email" name="email" autocomplete="email">
-					</div>
-					<button type="submit">Subscribe</button>
-				</form>
+		<div class="wrap">
+			<div class="site-footer__grid">
+				<div>
+					<h2>Fresh-bake alerts</h2>
+					<p>One email a week when something new comes out of the oven.</p>
+					<form class="form" action="#" method="post">
+						<div class="field">
+							<label for="newsletter-email">Email address</label>
+							<input id="newsletter-email" type="email" name="email" autocomplete="email">
+						</div>
+						<div><button class="btn btn--primary" type="submit">Subscribe</button></div>
+					</form>
+				</div>
+				<div>
+					<h2>Visit</h2>
+					<p>1247 NW Stark Street<br>Portland, Oregon 97209</p>
+					<ul class="site-footer__links">
+						<li><a href="menu.html">Menu</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="events.html">Events</a></li>
+					</ul>
+				</div>
+				<div>
+					<h2>Hours</h2>
+					<p>Weekdays 6am – 7pm<br>Weekends 7am – 6pm</p>
+					<ul class="site-footer__links">
+						<li><a href="about.html">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<h2>About this site</h2>
-				<p>A deliberately half-broken static demo used to show accessibility scanning in CI/CD. See the <a href="https://github.com/pattonwebz/a11y-test-site">source on GitHub</a> for what's intentionally broken and why.</p>
-			</div>
+			<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists as a demonstration project.</p>
 		</div>
-		<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists to be scanned, not to sell bread.</p>
 	</footer>
 </body>
 </html>

@@ -39,16 +39,13 @@ jobs:
           cat server.log || true
           exit 1
 
+      # Derived from the files on disk so the list can never drift out of sync
+      # with the site itself.
       - name: Build URL list
         run: |
-          printf '%s\n' \
-            "http://127.0.0.1:4173/index.html" \
-            "http://127.0.0.1:4173/about.html" \
-            "http://127.0.0.1:4173/menu.html" \
-            "http://127.0.0.1:4173/gallery.html" \
-            "http://127.0.0.1:4173/events.html" \
-            "http://127.0.0.1:4173/contact.html" \
-            "http://127.0.0.1:4173/clean.html" > urls.txt
+          for page in site/*.html; do
+            echo "http://127.0.0.1:4173/$(basename "$page")"
+          done > urls.txt
           cat urls.txt
 
       - name: Scan with axe-core

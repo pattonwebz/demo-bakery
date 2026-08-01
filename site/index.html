@@ -3,20 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Demo Bakery — Home</title>
+	<title>Demo Bakery — Artisan bread, baked daily in Portland</title>
+	<meta name="description" content="Sourdough, croissants and cinnamon rolls baked by hand every morning at Demo Bakery in Portland, Oregon.">
 	<link rel="stylesheet" href="assets/style.css">
-	<style>
-		/* Intentional violation, unchanged: low-contrast text (renamed class
-		   only, to avoid colliding with the new .hero section below — same
-		   #fff/#bbb colors, same violation). */
-		.demo-tagline { background: #fff; color: #bbb; padding: 1rem; }
-		.fake-button { background: #eee; padding: 0.5rem 1rem; display: inline-block; cursor: pointer; }
-	</style>
 </head>
 <body>
+	<a class="skip-link" href="#main">Skip to main content</a>
+
 	<nav class="site-nav" aria-label="Primary">
 		<div class="site-nav__inner">
-			<a class="site-nav__logo" href="index.html">🍞 Demo Bakery</a>
+			<a class="site-nav__logo" href="index.html">Demo Bakery</a>
 			<ul class="site-nav__links">
 				<li><a href="index.html" aria-current="page">Home</a></li>
 				<li><a href="menu.html">Menu</a></li>
@@ -24,107 +20,157 @@
 				<li><a href="events.html">Events</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
-				<li><a href="clean.html">The Accessible Page</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<main>
-	<section class="hero">
-		<div class="wrap">
-			<p class="hero__eyebrow">Baked fresh, broken on purpose</p>
-			<h1>Demo Bakery</h1>
-			<p class="hero__subtitle demo-tagline">Freshly baked accessibility violations, every deploy.</p>
-			<div class="hero__actions">
-				<a class="btn btn--primary" href="#menu">See the menu</a>
-				<a class="btn btn--ghost" href="about.html">How this demo works</a>
+	<main id="main">
+		<section class="hero">
+			<div class="hero__media">
+				<img src="assets/img/hero-flour-2000.jpg"
+					srcset="assets/img/hero-flour-800.jpg 640w, assets/img/hero-flour-1200.jpg 960w, assets/img/hero-flour-2000.jpg 1600w"
+					sizes="100vw" width="1600" height="2000"
+					alt="A baker's hands clapping flour over a freshly baked round loaf on a wooden board.">
 			</div>
-		</div>
-	</section>
-
-	<div class="wrap">
-		<!-- Image with no alt text (intentional violation, unchanged; src points at a
-		     real file so it's the missing alt attribute that's the issue, not a 404) -->
-		<img src="assets/bread.svg" width="200" height="120">
-
-		<!-- Non-semantic clickable div instead of a button (intentional violation, unchanged) -->
-		<div class="fake-button" onclick="alert('ordered!')">Order now</div>
-
-		<!-- Link with no discernible text (intentional violation, unchanged) -->
-		<a href="about.html"></a>
-
-		<p>Browse our <a href="menu.html">full menu</a>, check out <a href="gallery.html">photos</a>, see <a href="events.html">upcoming events</a>, or visit our <a href="about.html">about page</a>. The <a href="clean.html">accessible page</a> shows what zero violations looks like.</p>
-	</div>
-
-	<section class="menu" id="menu">
-		<div class="wrap">
-			<h2>Today's bakes</h2>
-			<div class="menu__grid">
-				<article class="menu__card">
-					<p class="menu__card-icon" aria-hidden="true">🥖</p>
-					<h3>Sourdough</h3>
-					<p>Slow-fermented, crusty, and proofed for 18 hours.</p>
-				</article>
-				<article class="menu__card">
-					<p class="menu__card-icon" aria-hidden="true">🥐</p>
-					<h3>Croissants</h3>
-					<p>Laminated, buttery, and gone before 9am.</p>
-				</article>
-				<article class="menu__card">
-					<p class="menu__card-icon" aria-hidden="true">🍪</p>
-					<h3>Cinnamon rolls</h3>
-					<p>Warm, gooey, and worth the queue.</p>
-				</article>
-			</div>
-		</div>
-	</section>
-
-	<section class="section" style="padding: 2rem 0;">
-		<div class="wrap">
-			<h2 style="text-align: center; margin-bottom: 1.5rem;">What our customers say</h2>
-			<div class="testimonials">
-				<div class="testimonial">
-					<blockquote>Best sourdough in Portland. The crust crackles when you cut into it.</blockquote>
-					<cite>— Sarah K.</cite>
-				</div>
-				<div class="testimonial">
-					<blockquote>Their cinnamon rolls are worth the queue. I get there at 8am sharp.</blockquote>
-					<cite>— Marcus T.</cite>
+			<div class="wrap hero__inner">
+				<p class="eyebrow">Artisan bread</p>
+				<h1>Built to last</h1>
+				<p class="hero__subline">Minimal ingredients. Maximum complexity.</p>
+				<div class="btn-row">
+					<a class="btn btn--primary" href="menu.html">See the menu</a>
+					<a class="btn btn--ghost" href="about.html">Our story</a>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Violations only the EDAC custom ruleset detects (no standard axe equivalent) -->
-	<section aria-label="Custom rule triggers">
-		<div class="wrap">
-			<p style="text-align: justify;">This paragraph is deliberately fully justified, which standard axe-core does not flag at all. The custom text_justified rule should report it because justified text creates uneven word spacing that harms readability for dyslexic readers, and this sentence is padded to span several lines.</p>
-			<p style="font-size: 9px;">Deliberately tiny 9px text that only the custom text_small rule flags.</p>
-			<p><u>Deliberately underlined non-link text for the custom underlined_text rule.</u></p>
-			<p><a href="https://example.com/some/page.html">https://example.com/some/page.html</a></p>
-		</div>
-	</section>
+		<section class="section section--sunken">
+			<div class="wrap">
+				<div class="section__head">
+					<p class="eyebrow">Today's bakes</p>
+					<h2>Three things, done properly.</h2>
+				</div>
+				<div class="grid">
+					<article class="card">
+						<div class="card__media">
+							<img src="assets/img/sourdough-loaf-800.jpg" width="533" height="800" loading="lazy"
+								alt="A round sourdough loaf with a flour-dusted, scored crust held in a linen cloth.">
+						</div>
+						<div class="card__body">
+							<h3>Sourdough</h3>
+							<p>Fermented overnight. Sour. Crackling crust.</p>
+						</div>
+					</article>
+					<article class="card">
+						<div class="card__media">
+							<img src="assets/img/croissants-tray-800.jpg" width="533" height="800" loading="lazy"
+								alt="Golden croissants lined up in rows on a perforated baking tray.">
+						</div>
+						<div class="card__body">
+							<h3>Croissants</h3>
+							<p>Laminated butter. Crisp exterior.</p>
+						</div>
+					</article>
+					<article class="card">
+						<div class="card__media">
+							<img src="assets/img/cinnamon-rolls-800.jpg" width="600" height="800" loading="lazy"
+								alt="Cinnamon rolls topped with pearl sugar, arranged on a dark floured tray.">
+						</div>
+						<div class="card__body">
+							<h3>Cinnamon rolls</h3>
+							<p>Brown sugar spiral. Warm.</p>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="statement">
+			<div class="statement__media">
+				<img src="assets/img/rustic-loaves-2000.jpg"
+					srcset="assets/img/rustic-loaves-800.jpg 800w, assets/img/rustic-loaves-1200.jpg 1200w, assets/img/rustic-loaves-2000.jpg 1600w"
+					sizes="100vw" width="1600" height="1064" loading="lazy"
+					alt="Three seeded and flour-dusted loaves resting on dark wood with ears of wheat.">
+			</div>
+			<div class="wrap statement__inner">
+				<h2>Slow is better.</h2>
+				<p>We take the time so you don't have to.</p>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="wrap">
+				<div class="grid grid--2">
+					<figure class="quote">
+						<blockquote>The best sourdough in the city.</blockquote>
+						<figcaption>Marcus T.</figcaption>
+					</figure>
+					<figure class="quote">
+						<blockquote>Changed how I think about breakfast.</blockquote>
+						<figcaption>Elena R.</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<section class="statement">
+			<div class="statement__media">
+				<img src="assets/img/dough-hands-2000.jpg"
+					srcset="assets/img/dough-hands-800.jpg 533w, assets/img/dough-hands-1200.jpg 800w, assets/img/dough-hands-2000.jpg 1333w"
+					sizes="100vw" width="1333" height="2000" loading="lazy"
+					alt="A baker in an apron shaping a ball of dough on a heavily floured counter.">
+			</div>
+			<div class="wrap statement__inner">
+				<h2>Made by hand.</h2>
+				<p>Every loaf reflects the baker's experience.</p>
+			</div>
+		</section>
+
+		<section class="section section--tight section--dark">
+			<div class="wrap center">
+				<p class="eyebrow">Find us</p>
+				<h2>1247 NW Stark Street.</h2>
+				<p class="lede center">Open from six, every weekday morning.</p>
+				<div class="btn-row btn-row--center">
+					<a class="btn btn--primary" href="contact.html">Visit the bakery</a>
+				</div>
+			</div>
+		</section>
 	</main>
 
 	<footer class="site-footer">
-		<div class="site-footer__inner">
-			<div>
-				<h2>Get fresh-bake alerts</h2>
-				<p>One email a week when something new comes out of the oven. No spam, just bread.</p>
-				<form class="newsletter-form" action="#" method="post">
-					<div class="field">
-						<label for="newsletter-email">Email address</label>
-						<input id="newsletter-email" type="email" name="email" autocomplete="email">
-					</div>
-					<button type="submit">Subscribe</button>
-				</form>
+		<div class="wrap">
+			<div class="site-footer__grid">
+				<div>
+					<h2>Fresh-bake alerts</h2>
+					<p>One email a week when something new comes out of the oven.</p>
+					<form class="form" action="#" method="post">
+						<div class="field">
+							<label for="newsletter-email">Email address</label>
+							<input id="newsletter-email" type="email" name="email" autocomplete="email">
+						</div>
+						<div><button class="btn btn--primary" type="submit">Subscribe</button></div>
+					</form>
+				</div>
+				<div>
+					<h2>Visit</h2>
+					<p>1247 NW Stark Street<br>Portland, Oregon 97209</p>
+					<ul class="site-footer__links">
+						<li><a href="menu.html">Menu</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="events.html">Events</a></li>
+					</ul>
+				</div>
+				<div>
+					<h2>Hours</h2>
+					<p>Weekdays 6am – 7pm<br>Weekends 7am – 6pm</p>
+					<ul class="site-footer__links">
+						<li><a href="about.html">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<h2>About this site</h2>
-				<p>A deliberately half-broken static demo used to show accessibility scanning in CI/CD. See the <a href="https://github.com/pattonwebz/a11y-test-site">source on GitHub</a> for what's intentionally broken and why.</p>
-			</div>
+			<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists as a demonstration project.</p>
 		</div>
-		<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists to be scanned, not to sell bread.</p>
 	</footer>
 </body>
 </html>

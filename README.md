@@ -1,49 +1,56 @@
 # a11y test site
 
-A deliberately half-broken static site — "Demo Bakery" — used to demo accessibility testing in
-CI/CD. On every push it deploys to GitHub Pages and is then scanned live by
+A static demo site — "Demo Bakery" — used to demonstrate accessibility testing in CI/CD with
 [axe-scan-action](https://github.com/pattonwebz/axe-scan-action) +
-[axe-report-action](https://github.com/pattonwebz/axe-report-action) — see the job summary of any
-[Deploy and scan run](../../actions) for the report.
+[axe-report-action](https://github.com/pattonwebz/axe-report-action).
 
-**The workflow is expected to fail.** That's the demo: the report enforces `fail-on: serious`
-against pages that contain intentional violations.
+**`main` is clean: zero axe violations across all six pages.** That is the point. Breakage is
+introduced deliberately *in pull requests*, so the demo shows a gate catching a regression before it
+reaches production — not a permanently red build.
 
-## Pull-request merge gate (fast CI path)
+> This inverts how the repo previously worked. It used to ship intentional violations on `main` with
+> a single `clean.html` as the passing row. That premise made it impossible to demonstrate a gate
+> actually blocking anything, because the baseline was already failing.
 
-This repo now includes a dedicated PR workflow at
-`.github/workflows/pr-gate-scan.yml` with job name:
+## How the gate works
 
-- **`PR Accessibility Gate`**
+### On push to `main` — `.github/workflows/deploy-and-scan.yml`
 
-The job serves `site/` locally on the Actions runner, scans all pages with
-`axe-scan-action`, renders summary/report artifacts, and fails on threshold.
-Because it scans localhost on-runner, it is much faster than server deploy
-flows and is ideal for live CI gate demos.
+Two jobs, in order:
 
-To make this a true merge gate, set branch protection on `main` and require:
+1. **`Accessibility Gate`** — serves `site/` on the runner and scans every page with axe-core,
+   failing on `serious`.
+2. **`Deploy to GitHub Pages`** — `needs: accessibility`.
 
-- **`PR Accessibility Gate`**
+Because the gate runs *first*, a site with a serious violation is never published. The deploy job is
+skipped entirely.
 
-All seven pages share a real product-site look (`site/assets/style.css`): a nav bar, a hero
-section, a menu/feature grid, and a footer with a working newsletter signup form — so the
-intentional violations sit inside a page that actually looks like something worth scanning,
-rather than bare unstyled markup. That chrome is itself real, tested code: verified with a real
-axe-core scan against all three pages, with two contrast bugs the chrome introduced (a footer text
-color and a footer link color, both only checked against the light background originally, not the
-footer's dark one) found and fixed the same way — by actually running the scan, not assuming the
-CSS was fine. `clean.html` is re-verified at 0 violations after every change to the shared chrome,
-since that's its entire job.
+### On pull request — `.github/workflows/pr-gate-scan.yml`
 
-| Page | Intentional issues |
-|---|---|---|
-| `index.html` | Image without alt text, low-contrast text, clickable `div`, link with no text |
-| `about.html` | Missing `lang` attribute, skipped heading level, unlabeled form inputs (note: axe's automated `label` rule does not flag the unlabeled inputs — `placeholder` text satisfies the accessible-name computation even though it disappears on focus; this is a real, documented limit of automated scanning, not a bug in this demo) |
-| `menu.html` | Table without `scope` on `th`, empty `th` (empty-table-header), decorative SVG icon with `aria-hidden` instead of accessible name, dead link (`href=""`), low-contrast promo banner text |
-| `gallery.html` | Gallery images with no `alt` attribute (image-alt), SVG icon with `role="presentation"` that conveys meaning, `tabindex="3"` on non-interactive element, `role="img"` without `aria-label`, empty link wrapping content |
-| `events.html` | Heading level skip (h2→h5), non-semantic list (div-based), `<p>` styled to look like a heading, low-contrast `date-badge--faint` |
-| `contact.html` | Duplicate `id` attribute on two inputs, submit button with no text content, textarea without associated `<label>`, mislabeled team photo (decorative `alt=""` on informative image) |
-| `clean.html` | None — exists to show a passing row in the report |
+- Job name: **`PR Accessibility Gate`**
+
+Serves `site/` locally on the runner, scans all pages, renders summary and report artifacts, and
+fails on threshold. Scanning localhost on-runner is much faster than a deploy-then-scan flow, which
+makes it suitable for a live CI demo.
+
+To make this a true merge gate, set branch protection on `main` and require the
+**`PR Accessibility Gate`** check.
+
+Both workflows derive their URL list from the `.html` files actually present in `site/`, so the list
+cannot drift out of sync when a page is added or removed.
+
+## The site
+
+Six pages: `index`, `menu`, `gallery`, `events`, `about`, `contact`.
+
+Design system lives in `site/assets/style.css` — a cool near-monochrome palette with photography
+carrying all the colour, built on explicit type, spacing, radius and elevation scales. Body text
+runs at 8.6:1 contrast and muted-on-dark at 12.0:1, both clearing AAA.
+
+All photography is vendored locally in `site/assets/img/` — see
+[`ATTRIBUTIONS.md`](site/assets/img/ATTRIBUTIONS.md). **The site makes no remote requests.** It
+previously hotlinked eight Unsplash URLs, four of which had already gone 404, so the live site was
+serving broken images. Vendoring also keeps the site scannable on an unreliable network.
 
 ## Running locally (no CI cost)
 
@@ -53,10 +60,19 @@ npm run demo:local
 ```
 
 This serves `site/` on `http://127.0.0.1:8899/` and runs the *actual* axe-scan-action and
-axe-report-action code (both installed as normal git devDependencies, pinned to the same tags
-the workflow uses) as plain Node scripts driven by `INPUT_*` env vars — exactly how the GitHub
-Actions runner invokes them. No GitHub Actions runtime, no CI minutes, same report as CI produces.
+axe-report-action code (both installed as normal git devDependencies, pinned to the same tags the
+workflow uses) as plain Node scripts driven by `INPUT_*` env vars — exactly how the GitHub Actions
+runner invokes them. No GitHub Actions runtime, no CI minutes, same report as CI produces.
 
 Writes `artifacts/axe-results.json` and `artifacts/a11y-summary.md`. Override the port with
 `PORT=8898 npm run demo:local` if 8899 is taken, or `FAIL_ON=none npm run demo:local` /
 `SHOW_PERSONAS=false npm run demo:local` to change thresholds without touching the workflow file.
+
+## Demonstrating a failure
+
+Open a pull request that introduces a serious violation — a missing `alt` on a meaningful image, an
+unlabelled control, a contrast regression. The `PR Accessibility Gate` check goes red and the report
+artifact names the rule, the element and the page. With branch protection configured, the merge
+button is disabled.
+
+Keep `main` clean. That is what makes the red check mean something.

@@ -3,27 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Demo Bakery — Events</title>
+	<title>Events — Demo Bakery</title>
+	<meta name="description" content="Workshops, late-night bakes and cuppings at Demo Bakery in Portland.">
 	<link rel="stylesheet" href="assets/style.css">
-	<style>
-		/* INTENTIONAL VIOLATION: styling a <p> to look like a heading */
-		.faux-heading {
-			font-size: 1.4rem;
-			font-weight: 700;
-			color: #4a3520;
-			margin: 0 0 0.75rem;
-		}
-		/* INTENTIONAL VIOLATION: making divs look like a list */
-		.fake-list > div {
-			padding: 0.5rem 0;
-			border-bottom: 1px solid #efe3d0;
-		}
-	</style>
 </head>
 <body>
+	<a class="skip-link" href="#main">Skip to main content</a>
+
 	<nav class="site-nav" aria-label="Primary">
 		<div class="site-nav__inner">
-			<a class="site-nav__logo" href="index.html">🍞 Demo Bakery</a>
+			<a class="site-nav__logo" href="index.html">Demo Bakery</a>
 			<ul class="site-nav__links">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="menu.html">Menu</a></li>
@@ -31,126 +20,118 @@
 				<li><a href="events.html" aria-current="page">Events</a></li>
 				<li><a href="about.html">About</a></li>
 				<li><a href="contact.html">Contact</a></li>
-				<li><a href="clean.html">The Accessible Page</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80');">
-		<p class="page-hero__eyebrow">Come bake with us</p>
-		<h1>Events & workshops</h1>
-		<p class="page-hero__lede">From sourdough starter classes to holiday pop-ups — there's always something happening at Demo Bakery.</p>
-	</section>
+	<main id="main">
+		<header class="page-hero">
+			<div class="wrap">
+				<p class="eyebrow">What we do</p>
+				<h1>Upcoming events</h1>
+				<p class="lede">Beyond the counter, join us.</p>
+			</div>
+		</header>
 
-	<main>
-		<div class="wrap">
-			<section class="section">
-				<h2 class="section__title">Upcoming events</h2>
-				<p class="section__intro">Classes fill up fast. Reserve your spot today.</p>
-
-				<div class="events-list">
-					<article class="event-card">
-						<div class="date-badge">
-							<span class="date-badge__day">12</span>
-							<span class="date-badge__month">Apr</span>
+		<section class="section">
+			<div class="wrap">
+				<ul class="events-list">
+					<li class="event">
+						<div class="event__date">
+							<span class="event__day">14</span>
+							<span class="event__month">Nov</span>
 						</div>
-						<div>
-							<h3 class="event-card__title">Sourdough starter workshop</h3>
-							<p class="event-card__meta">10:00am - 12:30pm | $45</p>
-							<p>Learn to cultivate, feed, and bake with your own sourdough starter. Take home a jar of starter and a fresh loaf.</p>
-							<button type="button" class="btn btn--primary">Reserve a spot</button>
+						<div class="event__body">
+							<h2>Sourdough workshop</h2>
+							<p class="event__time">2:00pm</p>
+							<p>Learn starter care and bulk fermentation technique.</p>
 						</div>
-					</article>
-
-					<article class="event-card">
-						<div class="date-badge date-badge--faint">
-							<span class="date-badge__day">19</span>
-							<span class="date-badge__month">Apr</span>
+					</li>
+					<li class="event">
+						<div class="event__date">
+							<span class="event__day">05</span>
+							<span class="event__month">Dec</span>
 						</div>
-						<!-- INTENTIONAL VIOLATION: date-badge with --faint class has low foreground contrast -->
-
-						<div>
-							<h3 class="event-card__title">Croissant masterclass</h3>
-							<p class="event-card__meta">9:00am - 1:00pm | $75</p>
-							<p>The art of lamination — butter, fold, chill, repeat. You'll make classic croissants, pain au chocolat, and ham-and-cheese.</p>
-							<button type="button" class="btn btn--primary">Reserve a spot</button>
+						<div class="event__body">
+							<h2>Late night bake</h2>
+							<p class="event__time">11:00pm</p>
+							<p>Midnight shift with our bakers. Flour and coffee.</p>
 						</div>
-					</article>
-
-					<article class="event-card">
-						<div class="date-badge">
-							<span class="date-badge__day">26</span>
-							<span class="date-badge__month">Apr</span>
+					</li>
+					<li class="event">
+						<div class="event__date">
+							<span class="event__day">10</span>
+							<span class="event__month">Jan</span>
 						</div>
-						<div>
-							<h3 class="event-card__title">Baking with kids: cookie party</h3>
-							<p class="event-card__meta">2:00pm - 4:00pm | $25 per child</p>
-							<p>A fun, messy afternoon of cookie decorating. All supplies included. Ages 4-12.</p>
-							<button type="button" class="btn btn--primary">Reserve a spot</button>
+						<div class="event__body">
+							<h2>Kids' pastry class</h2>
+							<p class="event__time">10:00am</p>
+							<p>Croissants and danish. Hands-on baking for young bakers.</p>
 						</div>
-					</article>
-				</div>
-			</section>
+					</li>
+					<li class="event">
+						<div class="event__date">
+							<span class="event__day">02</span>
+							<span class="event__month">Feb</span>
+						</div>
+						<div class="event__body">
+							<h2>Coffee cupping</h2>
+							<p class="event__time">3:00pm</p>
+							<p>Pair our pastries with single-origin coffees from local roasters.</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
 
-			<section class="section section--alt" style="padding: 2.5rem;">
-				<!-- INTENTIONAL VIOLATION: heading level skip — h2 directly to h5 -->
-				<h5>Past events</h5>
-				<!-- INTENTIONAL VIOLATION: non-semantic list built from divs -->
-				<div class="fake-list">
-					<div>Mar 5 — Bagel-making workshop</div>
-					<div>Feb 21 — Valentine's pastry class</div>
-					<div>Feb 7 — Bread for beginners</div>
-				</div>
-			</section>
-
-			<section class="section">
-				<div class="signup-card">
-					<p class="faux-heading">Host your own event</p>
-					<p>Birthday parties, team outings, private baking classes — we've hosted them all. Get in touch and we'll put together a custom experience.</p>
-					<!-- INTENTIONAL VIOLATION: p styled to look like a heading (faux-heading) -->
-					<a class="btn btn--primary" href="contact.html">Contact us</a>
-				</div>
-			</section>
-
-			<section class="section section--alt" style="padding: 2.5rem;">
-				<h2 class="section__title">What people say</h2>
-				<div class="testimonials">
-					<div class="testimonial">
-						<blockquote>The sourdough workshop was incredible. I've been baking every weekend since.</blockquote>
-						<cite>— Alex M.</cite>
-					</div>
-					<div class="testimonial">
-						<blockquote>We booked the bakery for a team event and it was the best afternoon we've had together.</blockquote>
-						<cite>— Jamie L.<br><span>Local business owner</span></cite>
-					</div>
-				</div>
-
-				<div style="margin-top: 2rem; text-align: center;">
-					<p>Got a question about an event? <a href="contact.html">Drop us a line</a>.</p>
-				</div>
-			</section>
-		</div>
+		<section class="statement">
+			<div class="statement__media">
+				<img src="assets/img/kneading-2000.jpg"
+					srcset="assets/img/kneading-800.jpg 800w, assets/img/kneading-1200.jpg 1200w, assets/img/kneading-2000.jpg 1600w"
+					sizes="100vw" width="1600" height="1067" loading="lazy"
+					alt="A baker kneading dough on a flour-covered countertop.">
+			</div>
+			<div class="wrap statement__inner">
+				<h2>Come stand at the bench.</h2>
+				<p>Places are limited to eight. Book at the counter.</p>
+			</div>
+		</section>
 	</main>
 
 	<footer class="site-footer">
-		<div class="site-footer__inner">
-			<div>
-				<h2>Get fresh-bake alerts</h2>
-				<p>One email a week when something new comes out of the oven. No spam, just bread.</p>
-				<form class="newsletter-form" action="#" method="post">
-					<div class="field">
-						<label for="newsletter-email">Email address</label>
-						<input id="newsletter-email" type="email" name="email" autocomplete="email">
-					</div>
-					<button type="submit">Subscribe</button>
-				</form>
+		<div class="wrap">
+			<div class="site-footer__grid">
+				<div>
+					<h2>Fresh-bake alerts</h2>
+					<p>One email a week when something new comes out of the oven.</p>
+					<form class="form" action="#" method="post">
+						<div class="field">
+							<label for="newsletter-email">Email address</label>
+							<input id="newsletter-email" type="email" name="email" autocomplete="email">
+						</div>
+						<div><button class="btn btn--primary" type="submit">Subscribe</button></div>
+					</form>
+				</div>
+				<div>
+					<h2>Visit</h2>
+					<p>1247 NW Stark Street<br>Portland, Oregon 97209</p>
+					<ul class="site-footer__links">
+						<li><a href="menu.html">Menu</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="events.html">Events</a></li>
+					</ul>
+				</div>
+				<div>
+					<h2>Hours</h2>
+					<p>Weekdays 6am – 7pm<br>Weekends 7am – 6pm</p>
+					<ul class="site-footer__links">
+						<li><a href="about.html">About</a></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<h2>About this site</h2>
-				<p>A deliberately half-broken static demo used to show accessibility scanning in CI/CD. See the <a href="https://github.com/pattonwebz/a11y-test-site">source on GitHub</a> for what's intentionally broken and why.</p>
-			</div>
+			<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists as a demonstration project.</p>
 		</div>
-		<p class="site-footer__meta">Demo Bakery isn't a real bakery. This site exists to be scanned, not to sell bread.</p>
 	</footer>
 </body>
 </html>
