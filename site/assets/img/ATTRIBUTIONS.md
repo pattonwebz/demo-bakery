@@ -11,7 +11,10 @@ scannable in CI and safe to demo on an unreliable conference network.
 
 ## Files
 
-Each source image is emitted at three widths: `-2000`, `-1200` and `-800`.
+Images in use are emitted at up to three widths: `-2000`, `-1200` and `-800`. Widths that no page
+references have been pruned, so not every subject has all three. A few subjects
+(`chocolate-cake`, `croissants-sheet`, `pastry-case`) are kept at `-800` only as a small library for
+future pages.
 
 | Asset | Photographer | Source |
 | --- | --- | --- |
