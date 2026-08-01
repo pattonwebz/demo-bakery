@@ -453,6 +453,24 @@ a { color: inherit; }
 }
 
 /* --------------------------------------------------------------------------
+   Promo banner
+   -------------------------------------------------------------------------- */
+
+.promo {
+	padding-block: var(--space-m);
+	background: var(--white);
+	border-bottom: 1px solid var(--rule);
+	text-align: center;
+}
+
+.promo__text {
+	font-size: var(--step-0);
+	letter-spacing: 0.02em;
+	/* Softer grey so the banner sits quietly under the hero. */
+	color: #b8b9bd;
+}
+
+/* --------------------------------------------------------------------------
    Cards — one card language everywhere
    -------------------------------------------------------------------------- */
 
