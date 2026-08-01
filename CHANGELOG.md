@@ -4,6 +4,15 @@ Notable changes to this demo site and its scan pipeline.
 
 ## 2026-08-01
 
+### Changed — repository renamed
+
+`a11y-test-site` → `demo-bakery`, to match what the project actually is now that `main` is a clean
+site rather than a catalogue of violations.
+
+**The GitHub Pages URL changed** to https://pattonwebz.github.io/demo-bakery/. GitHub redirects the
+old *repository* URL, but not the old *Pages* URL — https://pattonwebz.github.io/a11y-test-site/
+now 404s. Update any bookmark or slide pointing at it.
+
 ### Changed — the premise is inverted
 
 `main` is now **clean: zero axe violations across all six pages**. Deliberate breakage moves into

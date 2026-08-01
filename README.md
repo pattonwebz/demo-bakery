@@ -1,6 +1,6 @@
-# a11y test site
+# Demo Bakery
 
-A static demo site — "Demo Bakery" — used to demonstrate accessibility testing in CI/CD with
+A static demo site used to demonstrate accessibility testing in CI/CD with
 [axe-scan-action](https://github.com/pattonwebz/axe-scan-action) +
 [axe-report-action](https://github.com/pattonwebz/axe-report-action).
 
@@ -38,6 +38,8 @@ To make this a true merge gate, set branch protection on `main` and require the
 
 Both workflows derive their URL list from the `.html` files actually present in `site/`, so the list
 cannot drift out of sync when a page is added or removed.
+
+Live at **https://pattonwebz.github.io/demo-bakery/**.
 
 ## The site
 
