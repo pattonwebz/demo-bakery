@@ -291,7 +291,6 @@ a { color: inherit; }
 /* Any dark ground inverts the button pair. The hero and statement blocks sit
    on photographs, so they invert too — without this the ghost button renders
    near-black on a dark image and disappears. */
-.on-dark .btn--primary,
 .section--dark .btn--primary,
 .hero .btn--primary,
 .statement .btn--primary {
@@ -299,12 +298,10 @@ a { color: inherit; }
 	color: var(--ink-950);
 }
 
-.on-dark .btn--primary:hover,
 .section--dark .btn--primary:hover,
 .hero .btn--primary:hover,
 .statement .btn--primary:hover { background: var(--ink-200); }
 
-.on-dark .btn--ghost,
 .section--dark .btn--ghost,
 .hero .btn--ghost,
 .statement .btn--ghost {
@@ -312,7 +309,6 @@ a { color: inherit; }
 	color: var(--on-dark);
 }
 
-.on-dark .btn--ghost:hover,
 .section--dark .btn--ghost:hover,
 .hero .btn--ghost:hover,
 .statement .btn--ghost:hover {
